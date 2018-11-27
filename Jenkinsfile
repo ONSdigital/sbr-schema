@@ -26,6 +26,10 @@ pipeline {
         stage('Checkout') {
             agent { label 'download.jenkins.slave' }
             steps {
+                dir('config') {
+                    checkout poll: false, scm:
+                    [$class: 'GitSCM', branches: [[name: 'rushtg-master-patch-98323']], userRemoteConfigs: [[credentialsId: 'JenkinsSBR__gitlab', url: "${GITLAB_URL}/StatBusReg/${env.SVC_NAME}.git"]]]
+                }
                 checkout scm        
                 script {
                     buildInfo.name = "${SVC_NAME}"
@@ -42,6 +46,8 @@ pipeline {
             steps {
                 unstash name: 'Checkout'
                 sh "whoami"
+                sh "ls"
+                sh "ls config"
                 sh "ls config/Test"
                 // sh "sudo chmod -R 777 HBase_scripts"
                 // sh "sudo chmod -R 777 Dummy_Data"
