@@ -41,11 +41,8 @@ pipeline {
             agent { label "test.${agentSbtVersion}" }
             steps {
                 unstash name: 'Checkout'
-                dir('config') {
-                    git url: "${GITLAB_URL}/StatBusReg/${env.SVC_NAME}.git", credentialsId: 'JenkinsSBR__gitlab'
-                }
                 sh "whoami"
-                sh "ls"
+                sh "ls config/Test"
                 // sh "sudo chmod -R 777 HBase_scripts"
                 // sh "sudo chmod -R 777 Dummy_Data"
                 // sh "bash Run.sh sbr_dev_db 999912 r"
