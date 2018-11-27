@@ -5,9 +5,11 @@
 input=$1
 
 if [[ "$4" == r ]] ; then
-	url="https://apigw-in-d-01.ons.statistics.gov.uk"	
+	Hbase_url=$(head -n 1 config/test/Hbase-URL.txt)
+	API_url=$(head -n 1 config/test/API-URL.txt)	
 else
-	url="http://localhost"
+	Hbase_url="http://localhost:8080/"
+	API_url="http://localhost:9000/"
 fi
 
 # Set "," as the field separator using $IFS 
@@ -27,8 +29,8 @@ do
   	ubrn=$(sed -n '2p' < ubrn_ent.txt)
   	f2=$ubrn
   	echo $2 $3 $ern $ubrn
-	/bin/bash Edits/create_ent.sh $2 $3 $ern $url $4
-  	/bin/bash Edits/create_leu.sh $2 $3 $ern $ubrn $url $4
+	/bin/bash Edits/create_ent.sh $2 $3 $ern $Hbase_url
+  	/bin/bash Edits/create_leu.sh $2 $3 $ern $ubrn $Hbase_url
   	let "ern++"
   	let "ubrn++"
 	> ubrn_ent.txt
@@ -51,6 +53,6 @@ do
 	fi
   fi
   if [[ $f4 != *"*"* ]]; then
-  	/bin/bash Edits/call_api.sh $f1 $f2 $f3 $f4 $3 $4
+  	/bin/bash Edits/call_api.sh $f1 $f2 $f3 $f4 $3 $API_url
   fi
 done < "$input"

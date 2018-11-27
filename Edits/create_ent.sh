@@ -1,9 +1,5 @@
 m_table_headers=(ern name address1 postcode sic07 legal_status prn working_props employment region)
-if [[ "$5" == r ]] ; then
-	url="$4:9443/hbase/$1:enterprise_$2/rowkey"
-else
-	url="$4:8080/$1:enterprise_$2/rowkey"
-fi
+url="$4$1:enterprise_$2/rowkey"
 
 for i in "${!m_table_headers[@]}"; do
 	rn_64=$(echo -n "$(/bin/bash Edits/rev.sh $3)" | base64)

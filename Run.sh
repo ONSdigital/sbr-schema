@@ -1,6 +1,6 @@
 #!/bin/bash
 if [[ "$3" == r ]] ; then
-	url="https://apigw-in-d-01.ons.statistics.gov.uk:9443/hbase/"	
+	url=$(head -n 1 config/test/Hbase-URL.txt)
 else
 	url="http://localhost:8080/"
 fi
