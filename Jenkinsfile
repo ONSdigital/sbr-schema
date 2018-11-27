@@ -39,11 +39,11 @@ pipeline {
 
         stage('Run'){
             agent { label "test.${agentSbtVersion}" }
-            dir('config') {
-                git url: "${GITLAB_URL}/StatBusReg/${env.SVC_NAME}.git", credentialsId: 'JenkinsSBR__gitlab'
-            }
             steps {
                 unstash name: 'Checkout'
+                dir('config') {
+                    git url: "${GITLAB_URL}/StatBusReg/${env.SVC_NAME}.git", credentialsId: 'JenkinsSBR__gitlab'
+                }
                 sh "whoami"
                 sh "ls"
                 // sh "sudo chmod -R 777 HBase_scripts"
