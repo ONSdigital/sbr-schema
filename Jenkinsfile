@@ -39,13 +39,16 @@ pipeline {
 
         stage('Run'){
             agent { label "test.${agentSbtVersion}" }
+            dir('config') {
+                git url: "${GITLAB_URL}/StatBusReg/${env.SVC_NAME}.git", credentialsId: 'JenkinsSBR__gitlab'
+            }
             steps {
                 unstash name: 'Checkout'
                 sh "whoami"
                 sh "ls"
-                sh "sudo chmod -R 777 HBase_scripts"
-                sh "sudo chmod -R 777 Dummy_Data"
-                sh "bash Run.sh sbr_dev_db 999912 r"
+                // sh "sudo chmod -R 777 HBase_scripts"
+                // sh "sudo chmod -R 777 Dummy_Data"
+                // sh "bash Run.sh sbr_dev_db 999912 r"
             }
             post {
                 success {
@@ -56,42 +59,42 @@ pipeline {
                 }
             }
         }
-        stage('Test Edits'){
-            agent { label "test.${agentSbtVersion}" }
-            steps {
-                unstash name: 'Checkout'
-                sh "whoami"
-                sh "ls"
-                sh "sudo chmod -R 777 Edits/"
-                sh "bash edit.sh Edits/test_edits.txt sbr_dev_db 999912 r"
-            }
-            post {
-                success {
-                    colourText("info","Stage: ${env.STAGE_NAME} successful!")
-                }
-                failure {
-                    colourText("warn","Stage: ${env.STAGE_NAME} failed!")
-                }
-            }
-        }
-        stage('Test Data'){
-            agent { label "test.${agentSbtVersion}" }
-            steps {
-                unstash name: 'Checkout'
-                sh "whoami"
-                sh "ls"
-                sh "sudo chmod -R 777 HBase_Tests"
-                sh "bash HBase_Tests/Data.sh sbr_dev_db 999912 r"
-            }
-            post {
-                success {
-                    colourText("info","Stage: ${env.STAGE_NAME} successful!")
-                }
-                failure {
-                    colourText("warn","Stage: ${env.STAGE_NAME} failed!")
-                }
-            }
-        }
+        // stage('Test Edits'){
+        //     agent { label "test.${agentSbtVersion}" }
+        //     steps {
+        //         unstash name: 'Checkout'
+        //         sh "whoami"
+        //         sh "ls"
+        //         sh "sudo chmod -R 777 Edits/"
+        //         sh "bash edit.sh Edits/test_edits.txt sbr_dev_db 999912 r"
+        //     }
+        //     post {
+        //         success {
+        //             colourText("info","Stage: ${env.STAGE_NAME} successful!")
+        //         }
+        //         failure {
+        //             colourText("warn","Stage: ${env.STAGE_NAME} failed!")
+        //         }
+        //     }
+        // }
+        // stage('Test Data'){
+        //     agent { label "test.${agentSbtVersion}" }
+        //     steps {
+        //         unstash name: 'Checkout'
+        //         sh "whoami"
+        //         sh "ls"
+        //         sh "sudo chmod -R 777 HBase_Tests"
+        //         sh "bash HBase_Tests/Data.sh sbr_dev_db 999912 r"
+        //     }
+        //     post {
+        //         success {
+        //             colourText("info","Stage: ${env.STAGE_NAME} successful!")
+        //         }
+        //         failure {
+        //             colourText("warn","Stage: ${env.STAGE_NAME} failed!")
+        //         }
+        //     }
+        // }
         
     }
 }
