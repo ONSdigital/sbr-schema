@@ -1,7 +1,7 @@
 #!/bin/bash
 #file="Drop_Tables.txt"
 
-echo("$3$1:enterprise_$2/schema");
+echo "$3$1:enterprise_$2/schema"
 response=$(curl -k -s -w "%{http_code}" --header "Content-type: text/xml" --request DELETE "$3$1:enterprise_$2/schema")
 response=$(curl -k -s -w "%{http_code}" --header "Content-type: text/xml" --request DELETE "$3$1:legal_unit_$2/schema")
 response=$(curl -k -s -w "%{http_code}" --header "Content-type: text/xml" --request DELETE "$3$1:local_unit_$2/schema")
