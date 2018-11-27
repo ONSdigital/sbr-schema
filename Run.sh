@@ -1,6 +1,6 @@
 #!/bin/bash
 if [[ "$3" == r ]] ; then
-	url=$(head -n 1 config/test/Hbase-URL.txt)
+	url=$(head -n 1 config/Test/Hbase-URL.txt)
 else
 	url="http://localhost:8080/"
 fi

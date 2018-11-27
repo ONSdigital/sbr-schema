@@ -5,8 +5,8 @@
 input=$1
 
 if [[ "$4" == r ]] ; then
-	Hbase_url=$(head -n 1 config/test/Hbase-URL.txt)
-	API_url=$(head -n 1 config/test/API-URL.txt)	
+	Hbase_url=$(head -n 1 config/Test/Hbase-URL.txt)
+	API_url=$(head -n 1 config/Test/API-URL.txt)	
 else
 	Hbase_url="http://localhost:8080/"
 	API_url="http://localhost:9000/"
