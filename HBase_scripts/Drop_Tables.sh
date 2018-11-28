@@ -2,19 +2,19 @@
 #file="Drop_Tables.txt"
 
 echo "curl -k -s -w '%{http_code}' --header 'Content-type: text/xml' --request DELETE $3$1:enterprise_$2/schema"
-response=$(curl -k -s -w "%{http_code}" --header "Content-type: text/xml" --request DELETE "$3$1:enterprise_$2/schema")
+response=$(curl -k -s -v --header "Content-type: text/xml" --request DELETE "$3$1:enterprise_$2/schema")
 echo $response
 echo "curl -k -s -w '%{http_code}' --header 'Content-type: text/xml' --request DELETE $3$1:enterprise_$2/schema"
-response=$(curl -k -s -w "%{http_code}" --header "Content-type: text/xml" --request DELETE "$3$1:legal_unit_$2/schema")
+response=$(curl -k -s -v--header "Content-type: text/xml" --request DELETE "$3$1:legal_unit_$2/schema")
 echo $response
 echo "curl -k -s -w '%{http_code}' --header 'Content-type: text/xml' --request DELETE $3$1:enterprise_$2/schema"
-response=$(curl -k -s -w "%{http_code}" --header "Content-type: text/xml" --request DELETE "$3$1:local_unit_$2/schema")
+response=$(curl -k -s -v --header "Content-type: text/xml" --request DELETE "$3$1:local_unit_$2/schema")
 echo $response
 echo "curl -k -s -w '%{http_code}' --header 'Content-type: text/xml' --request DELETE $3$1:enterprise_$2/schema"
-response=$(curl -k -s -w "%{http_code}" --header "Content-type: text/xml" --request DELETE "$3$1:reporting_unit_$2/schema")
+response=$(curl -k -s -v --header "Content-type: text/xml" --request DELETE "$3$1:reporting_unit_$2/schema")
 echo $response
 echo "curl -k -s -w '%{http_code}' --header 'Content-type: text/xml' --request DELETE $3$1:enterprise_$2/schema"
-response=$(curl -k -s -w "%{http_code}" --header "Content-type: text/xml" --request DELETE "$3$1:unit_link_$2/schema")
+response=$(curl -k -s -v --header "Content-type: text/xml" --request DELETE "$3$1:unit_link_$2/schema")
 echo $response
 echo "curl -k -s -w '%{http_code}' --header 'Content-type: text/xml' --request DELETE $3$1:enterprise_$2/schema"
 if [[ "$4" != r ]] ; then
